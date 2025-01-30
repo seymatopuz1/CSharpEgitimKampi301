@@ -16,5 +16,57 @@ namespace CSharpEgitimKampi301.EFProject
         {
             InitializeComponent();
         }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+       
+        EgitimKampiEfTravelDbEntities db = new EgitimKampiEfTravelDbEntities();
+
+        private void btnList_Click(object sender, EventArgs e)
+        { 
+            var values=db.Guide.ToList();
+            dataGridView1.DataSource = values;
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            // Büyük olan sınıf küçük olan ise nesne örneğimiz oluyor
+            Guide guide = new Guide();
+            guide.GuideName=txtName.Text;
+            guide.GuideSurname=txtSurname.Text;
+            db.Guide.Add(guide);
+            db.SaveChanges();// Kaydetmek için 
+            MessageBox.Show("Rehber başarıyla eklendi.");
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            int id = int.Parse(txtId.Text);
+            var removeValue = db.Guide.Find(id);//Find değeri idye göre değer alıyor
+            db.Guide.Remove(removeValue);
+            db.SaveChanges();
+            MessageBox.Show("Rehber başarıyla silindi.");
+
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            int id = int.Parse(txtId.Text);
+            var updateValue = db.Guide.Find(id);
+            updateValue.GuideName = txtName.Text;
+            updateValue.GuideSurname = txtSurname.Text;
+            db.SaveChanges();
+            MessageBox.Show("Rehber başarıyla güncellendi.","Uyarı",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+
+        }
+        private void btnGetByID_Click(object sender, EventArgs e)
+        {
+            int id = int.Parse(txtId.Text);
+            var values = db.Guide.Where(x=>x.GuideId==id).ToList();
+            dataGridView1.DataSource = values;
+        }
     }
 }
