@@ -9,5 +9,7 @@ namespace CSharpEgitimKampi301.DataAccessLayer.Abstract
 {
     public interface IProductDal:IGenericDal<Product>
     {
+        //Kategori ile beraber ürünleri getirmemizi sağlayan metotdur
+        List<Object> GetProductsWithCategory();
     }
 }
