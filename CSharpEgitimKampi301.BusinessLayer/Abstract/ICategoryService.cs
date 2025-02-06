@@ -9,6 +9,5 @@ namespace CSharpEgitimKampi301.BusinessLayer.Abstract
 {
     public interface ICategoryService : IGenericService<Category>
     {
-        void Delete(Category entity);
     }
 }
